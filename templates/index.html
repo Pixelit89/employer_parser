@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+</head>
+<body>
+    <div class="container">
+        <form action="{% url 'parse' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-success" value="Start parsing" />
+        </form>
+        <table class="table table-bordered">
+            {% for object in object_list %}
+                <tr>
+                    <td>
+                        <a href="{{ object.site }}" target="_blank">{{ object.employer }}</a>
+                    </td>
+                    <td>
+                        {{ object.email }}
+                    </td>
+                    <td>
+                        {{ object.response }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>
